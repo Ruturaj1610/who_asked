@@ -1,14 +1,22 @@
 :root {
-  --bg-primary: #0a0e27;
-  --bg-secondary: #151b3d;
-  --bg-card: #1a2348;
-  --accent-primary: #ff6b9d;
-  --accent-secondary: #00d9ff;
-  --accent-yellow: #ffd93d;
+  /* New gradient theme colors */
+  --gradient-purple-dark: #8A1F6B;
+  --gradient-purple: #B83A9B;
+  --gradient-pink: #E3B6C8;
+  --gradient-cyan: #CFE6EA;
+  --gradient-blue: #2FA7E0;
+  
+  /* Updated color scheme */
+  --bg-primary: #1a0d1f;
+  --bg-secondary: #2d1b3d;
+  --bg-card: #3d2550;
+  --accent-primary: #B83A9B;
+  --accent-secondary: #2FA7E0;
+  --accent-tertiary: #E3B6C8;
   --text-primary: #ffffff;
-  --text-secondary: #b8c5db;
-  --border: #2d3a5f;
-  --success: #00ff88;
+  --text-secondary: #CFE6EA;
+  --border: #5a3d6b;
+  --success: #2FA7E0;
   --error: #ff4757;
 }
 
@@ -20,7 +28,7 @@
 
 body {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
+  background: linear-gradient(to bottom, #8A1F6B, #2d1b3d, #1a0d1f);
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
@@ -45,8 +53,9 @@ body {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 20% 30%, rgba(184, 58, 155, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(47, 167, 224, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(227, 182, 200, 0.08) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -70,7 +79,7 @@ h1 {
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   line-height: 1.1;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -128,13 +137,13 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-primary), #ff4d7d);
+  background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
   color: white;
-  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.3);
+  box-shadow: 0 8px 24px rgba(184, 58, 155, 0.4);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4);
+  box-shadow: 0 12px 32px rgba(184, 58, 155, 0.5);
   transform: translateY(-2px);
 }
 
@@ -199,7 +208,8 @@ p {
 
 /* Cards */
 .card {
-  background: var(--bg-card);
+  background: rgba(61, 37, 80, 0.6);
+  backdrop-filter: blur(10px);
   border: 2px solid var(--border);
   border-radius: 16px;
   padding: 32px;
@@ -214,7 +224,7 @@ p {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  background: linear-gradient(90deg, var(--gradient-purple), var(--gradient-blue));
   border-radius: 16px 16px 0 0;
 }
 
@@ -228,10 +238,10 @@ p {
   font-weight: 800;
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--accent-yellow), #ffb700);
-  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--gradient-pink), var(--gradient-cyan));
+  color: var(--gradient-purple-dark);
   border-radius: 50%;
-  box-shadow: 0 8px 24px rgba(255, 217, 61, 0.4);
+  box-shadow: 0 8px 24px rgba(227, 182, 200, 0.4);
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -282,7 +292,7 @@ p {
   display: inline-flex;
   align-items: center;
   padding: 6px 12px;
-  background: var(--accent-primary);
+  background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
   color: white;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -317,7 +327,7 @@ p {
 
 .category-btn.selected {
   border-color: var(--accent-primary);
-  background: rgba(255, 107, 157, 0.1);
+  background: rgba(184, 58, 155, 0.2);
 }
 
 .category-label {
@@ -331,7 +341,7 @@ p {
 
 /* Question display */
 .question-display {
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(0, 217, 255, 0.1));
+  background: linear-gradient(135deg, rgba(184, 58, 155, 0.15), rgba(47, 167, 224, 0.15));
   border: 3px solid var(--accent-primary);
   border-radius: 16px;
   padding: 40px;
@@ -390,13 +400,13 @@ p {
 
 .vote-btn:hover {
   border-color: var(--accent-primary);
-  background: rgba(255, 107, 157, 0.05);
+  background: rgba(184, 58, 155, 0.1);
   transform: translateY(-4px);
 }
 
 .vote-btn.selected {
   border-color: var(--accent-primary);
-  background: rgba(255, 107, 157, 0.15);
+  background: rgba(184, 58, 155, 0.25);
 }
 
 /* Success/Result animations */
@@ -413,7 +423,7 @@ p {
 .success-message {
   text-align: center;
   padding: 48px;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+  background: linear-gradient(135deg, rgba(47, 167, 224, 0.15), rgba(207, 230, 234, 0.15));
   border: 3px solid var(--success);
   border-radius: 16px;
   margin: 32px 0;
@@ -442,7 +452,7 @@ p {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  background: linear-gradient(90deg, var(--gradient-purple), var(--gradient-blue));
   transition: width 0.3s ease;
 }
 
@@ -487,7 +497,7 @@ p {
 
 .mode-option.selected {
   border-color: var(--accent-primary);
-  background: rgba(255, 107, 157, 0.1);
+  background: rgba(184, 58, 155, 0.2);
 }
 
 .mode-title {

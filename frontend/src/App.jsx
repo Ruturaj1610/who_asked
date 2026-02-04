@@ -11,7 +11,9 @@ import Result from './components/Result';
 import End from './components/End';
 import './App.css';
 
-const SOCKET_URL = 'http://localhost:3001';
+// Use the current host's IP address for socket connection
+// This allows both localhost and network connections to work
+const SOCKET_URL = `http://${window.location.hostname}:3001`;
 
 const PHASES = {
   LOBBY: 'LOBBY',
@@ -84,6 +86,10 @@ function App() {
       setRoomState(roomState);
     });
 
+    socket.on('answer_submitted', ({ roomState }) => {
+      setRoomState(roomState);
+    });
+
     socket.on('player_voted', ({ roomState }) => {
       setRoomState(roomState);
     });
@@ -110,6 +116,7 @@ function App() {
       socket.off('player_left');
       socket.off('phase_change');
       socket.off('player_submitted');
+      socket.off('answer_submitted');
       socket.off('player_voted');
       socket.off('timer_tick');
       socket.off('room_closed');
