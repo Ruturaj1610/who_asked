@@ -4,10 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
-    // Set base path for GitHub Pages deployment
-    // For repo named 'who_asked', the base will be '/who_asked/'
-    // Change this to '/' if deploying to a custom domain
-    base: process.env.NODE_ENV === 'production' ? '/who_asked/' : '/',
+    // Base path for deployment
+    // Netlify serves from root, so use '/'
+    base: '/',
     server: {
         port: 3000,
         host: true // Expose to network
