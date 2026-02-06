@@ -1,4 +1,4 @@
-# Question Party - Anonymous Question Game
+# Kon Re? - Anonymous Question Party Game 🎮
 
 A browser-based multiplayer party game where players submit anonymous questions, then try to guess who asked each one.
 
@@ -22,48 +22,76 @@ A browser-based multiplayer party game where players submit anonymous questions,
 - Vite
 - Socket.io Client
 
-## Getting Started
+## Quick Start ⚡
 
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
 
-### Installation
+### One-Command Setup
 
-1. **Clone or download the project**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Ruturaj1610/who_asked.git
+   cd who_asked
+   ```
 
-2. **Install Backend Dependencies**
-```bash
-cd backend
-npm install
-```
+2. **Install all dependencies**
+   ```bash
+   npm run install:all
+   ```
 
-3. **Install Frontend Dependencies**
-```bash
-cd ../frontend
-npm install
-```
+3. **Start both servers**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the game**
+   - Frontend: `http://localhost:3000`
+   - Backend: `http://localhost:3001`
+
+### Manual Installation (Alternative)
+
+If you prefer to install dependencies separately:
+
+1. **Install Backend Dependencies**
+   ```bash
+   cd backend
+   npm install
+   ```
+
+2. **Install Frontend Dependencies**
+   ```bash
+   cd frontend
+   npm install
+   ```
 
 ### Running the Game
 
-You need to run both backend and frontend servers:
-
-1. **Start the Backend Server**
+**Using root package.json (Recommended)**:
 ```bash
-cd backend
-npm start
-```
-The server will start on `http://localhost:3001`
-
-2. **Start the Frontend (in a new terminal)**
-```bash
-cd frontend
 npm run dev
 ```
-The frontend will start on `http://localhost:3000`
+This starts both backend and frontend servers concurrently.
+
+**Manual start**:
+
+1. **Start the Backend Server**
+   ```bash
+   cd backend
+   npm start
+   ```
+   The server will start on `http://localhost:3001`
+
+2. **Start the Frontend (in a new terminal)**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+   The frontend will start on `http://localhost:3000`
 
 3. **Open the game in your browser**
-Navigate to `http://localhost:3000`
+   Navigate to `http://localhost:3000`
 
 ## How to Play
 
@@ -102,32 +130,43 @@ Navigate to `http://localhost:3000`
 - Voting requires majority consensus to reveal the question owner
 - If the majority doesn't agree, the question owner stays anonymous
 
-## File Structure
+## Project Structure
 
 ```
-question-party-game/
+who_asked/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions for deployment
 ├── backend/
-│   ├── server.js          # Main server with Socket.io logic
+│   ├── server.js               # Main server with Socket.io logic
 │   └── package.json
-│
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── Home.jsx         # Landing page, create/join room
-    │   │   ├── Lobby.jsx        # Pre-game lobby
-    │   │   ├── QuestionEntry.jsx # Submit question phase
-    │   │   ├── QuestionReveal.jsx # Reveal question phase
-    │   │   ├── Answer.jsx       # Answer phase
-    │   │   ├── Discussion.jsx   # Discussion phase
-    │   │   ├── Voting.jsx       # Voting phase
-    │   │   ├── Result.jsx       # Show voting result
-    │   │   └── End.jsx          # Game over screen
-    │   ├── App.jsx         # Main app with phase management
-    │   ├── App.css         # Styles
-    │   └── main.jsx        # Entry point
-    ├── index.html
-    ├── vite.config.js
-    └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Home.jsx        # Landing page, create/join room
+│   │   │   ├── Lobby.jsx       # Pre-game lobby
+│   │   │   ├── QuestionEntry.jsx
+│   │   │   ├── QuestionReveal.jsx
+│   │   │   ├── Answer.jsx
+│   │   │   ├── Discussion.jsx
+│   │   │   ├── Voting.jsx
+│   │   │   ├── Result.jsx
+│   │   │   └── End.jsx
+│   │   ├── logo.png            # Game logo
+│   │   ├── backgroud.jpeg      # Background image
+│   │   ├── App.jsx             # Main app with phase management
+│   │   ├── App.css             # Styles
+│   │   └── main.jsx            # Entry point
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── package.json
+│   └── .env.example            # Environment variables template
+├── .gitignore                  # Git ignore rules
+├── .nojekyll                   # Disable Jekyll (GitHub Pages)
+├── CONTRIBUTING.md             # Contribution guidelines
+├── LICENSE                     # MIT License
+├── package.json                # Root package.json with scripts
+└── README.md                   # This file
 ```
 
 ## Configuration
@@ -182,6 +221,74 @@ These are configured in `backend/server.js`:
 - Ensure at least 2 players are in the room
 - Only the host can start the game
 
+## Deployment 🚀
+
+### GitHub Pages (Automated)
+
+This project includes GitHub Actions for automatic deployment to GitHub Pages.
+
+**Setup Steps:**
+
+1. **Push your code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages**
+   - Go to your repository Settings
+   - Navigate to Pages section
+   - Under "Source", select "GitHub Actions"
+
+3. **Automatic Deployment**
+   - Every push to `main` branch triggers automatic build and deployment
+   - Your site will be available at: `https://yourusername.github.io/who_asked/`
+
+**Note**: The frontend will be deployed as a static site. You'll need to deploy the backend separately (see Backend Deployment below).
+
+### Backend Deployment
+
+The backend needs to be deployed to a Node.js hosting service:
+
+**Options:**
+- **Render**: Free tier available, easy deployment
+- **Railway**: Simple Node.js deployment
+- **Heroku**: Classic option (paid)
+- **DigitalOcean**: VPS option
+
+**Steps for Render:**
+1. Create account at render.com
+2. Create new "Web Service"
+3. Connect your GitHub repository
+4. Set root directory to `backend`
+5. Build command: `npm install`
+6. Start command: `npm start`
+7. Deploy!
+
+**Update Frontend Config:**
+After deploying backend, update the socket URL in your frontend:
+```javascript
+// In frontend/src/App.jsx
+const SOCKET_URL = 'https://your-backend-url.onrender.com';
+```
+
+### Other Deployment Options
+
+**Vercel (Frontend)**
+```bash
+npm install -g vercel
+cd frontend
+vercel
+```
+
+**Netlify (Frontend)**
+```bash
+npm install -g netlify-cli
+cd frontend
+netlify deploy
+```
+
 ## Development
 
 To run in development mode with hot reload:
@@ -189,18 +296,34 @@ To run in development mode with hot reload:
 **Backend** (auto-restart on changes):
 ```bash
 npm install -g nodemon
+cd backend
 nodemon server.js
 ```
 
 **Frontend** (already has hot reload with Vite):
 ```bash
+cd frontend
 npm run dev
 ```
 
-## License
+## Contributing 🤝
 
-This project is provided as-is for educational and entertainment purposes.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments 🙏
+
+- Built with React and Socket.io
+- Inspired by social deduction party games
+- Beautiful gradient theme design
 
 ## Enjoy the Game! 🎉
 
 Have fun creating chaotic questions and guessing who asked what!
+
+---
+
+**Made with ❤️ for party game enthusiasts**
