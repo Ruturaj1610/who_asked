@@ -11,9 +11,13 @@ import Result from './components/Result';
 import End from './components/End';
 import './App.css';
 
-// Use the current host's IP address for socket connection
-// This allows both localhost and network connections to work
-const SOCKET_URL = `http://${window.location.hostname}:3001`;
+// Socket URL configuration
+// In production (GitHub Pages), use the deployed Render backend
+// In development, use localhost
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL ||
+  (import.meta.env.PROD
+    ? 'https://who-asked-oemo.onrender.com'
+    : `http://${window.location.hostname}:3001`);
 
 const PHASES = {
   LOBBY: 'LOBBY',
